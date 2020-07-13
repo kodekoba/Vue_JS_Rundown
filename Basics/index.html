@@ -9,29 +9,28 @@
 <body>
     
     <div id="app">
-        <!-- <p v-if="userAge >= allowedAge">
-            Go on right ahead bucko~
-        </p>
-        <p v-else-if="user === 'Akiko'">
-            Hello Miss Akiko welcome back.
-        </p>
-        <p v-else>
-            Sorry you're a baby!
+        <!-- <p v-for="(name, index) in names">
+            {{ index }} : {{ name }}
         </p> -->
+        
+        <!-- <ul>
+            <li v-for="(name, index) in names">
+                {{ index }} : {{ name }}
+            </li>
+        </ul> -->
+        
+        <!-- <ul>
+            <li v-for="(car, index) in cars">
+                {{ index }} : {{ car.brand }}, {{ car.color }}
+            </li>
+        </ul> -->
 
-        <!-- <p v-if="checkUser()">
-            {{user}} successfully logged in!
-        </p>
-        <p v-else>
-            You do not have access.
-        </p> -->
+        <ul>
+            <li v-for="(value, key, index) in user">
+                {{ index }} - {{ key }} : {{ value }}
+            </li>
+        </ul>
 
-        <p v-show="user === 'Akiko'">
-            This is a secret message!
-        </p>
-        <p v-show="user !== 'Akiko'">
-            Sorry, can't show secret message!
-        </p>
     </div>
 
 </body>
@@ -40,14 +39,26 @@
     new Vue({
         el:"#app",
         data:{
-            user:"Akiko",
-            userAge: 15,
-            allowedAge: 18
-        },
-        methods:{
-            checkUser(){
-                return this.user === 'Akiko' ? true : false
-            }
+            user: {
+                name: 'Akiko',
+                lastName: 'Kobayashi',
+                age: 21
+            },
+            names:['Akiko', 'Koba', 'Keja'],
+            cars: [
+                {
+                    brand: 'Ferrari',
+                    color: 'Red'
+                },
+                {
+                    brand: 'Lambo',
+                    color: 'Blue'
+                },
+                {
+                    brand: 'Ford',
+                    color: 'Black'
+                },
+            ]
         }
     })
 
