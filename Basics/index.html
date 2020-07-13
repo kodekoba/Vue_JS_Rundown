@@ -9,15 +9,29 @@
 <body>
     
     <div id="app">
-        <img v-bind:src="src" v-bind:alt="alt" />
-        <hr>
-        <a v-bind:href="link">Go to google</a>
-        <hr>
-        <p v-text="myText"></p>
-        <hr>
-        <div v-html="myHtml">
-            
-        </div>
+        <!-- <p v-if="userAge >= allowedAge">
+            Go on right ahead bucko~
+        </p>
+        <p v-else-if="user === 'Akiko'">
+            Hello Miss Akiko welcome back.
+        </p>
+        <p v-else>
+            Sorry you're a baby!
+        </p> -->
+
+        <!-- <p v-if="checkUser()">
+            {{user}} successfully logged in!
+        </p>
+        <p v-else>
+            You do not have access.
+        </p> -->
+
+        <p v-show="user === 'Akiko'">
+            This is a secret message!
+        </p>
+        <p v-show="user !== 'Akiko'">
+            Sorry, can't show secret message!
+        </p>
     </div>
 
 </body>
@@ -26,11 +40,14 @@
     new Vue({
         el:"#app",
         data:{
-            src: "https://picsum.photos/200/300",
-            alt: "image",
-            link: "http://google.com",
-            myText: 'Hello all!',
-            myHtml: "<strong>Akiko Kobayashi</strong>"
+            user:"Akiko",
+            userAge: 15,
+            allowedAge: 18
+        },
+        methods:{
+            checkUser(){
+                return this.user === 'Akiko' ? true : false
+            }
         }
     })
 
