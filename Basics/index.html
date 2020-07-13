@@ -9,12 +9,15 @@
 <body>
     
     <div id="app">
-        <p>{{ welcome() }}</p>
-
-        <!-- <p>is it true?: {{ isItTrue ? 'Yes' : 'No'}}</p>
-        <p>{{ array[1] }}</p>
-        <p>{{ obj.car }}</p>
-        <p>{{ func() }}</p> -->
+        <img v-bind:src="src" v-bind:alt="alt" />
+        <hr>
+        <a v-bind:href="link">Go to google</a>
+        <hr>
+        <p v-text="myText"></p>
+        <hr>
+        <div v-html="myHtml">
+            
+        </div>
     </div>
 
 </body>
@@ -23,21 +26,12 @@
     new Vue({
         el:"#app",
         data:{
-            greeting: 'Hello guys!',
-            isItTrue: true,
-            array: ['Akiko', 'Koba'],
-            obj: {
-                car:'Ferrari'
-            },
-            func: () => {
-                return 'Message from function'
-            }
-        },
-        methods: {
-            welcome(){
-                return this.greeting
-            }
-        },
+            src: "https://picsum.photos/200/300",
+            alt: "image",
+            link: "http://google.com",
+            myText: 'Hello all!',
+            myHtml: "<strong>Akiko Kobayashi</strong>"
+        }
     })
 
 </script>
