@@ -9,23 +9,19 @@
 <body>
     
     <div id="app">
-        
-        <form v-on:submit.prevent="formHandler">
-            <label>First Name</label>
-            <input type="text" v-model.trim="formData.name" /> <!-- trims white spaces -->
-            <hr>
-            
-            <label>Last Name</label>
-            <input type="text" v-model.trim="formData.lastName" /> 
-            <hr>
 
-            <label>Age</label>
-            <input type="text" v-model.number="formData.age" />
-            <hr>
-
-            <button type="submit">Submit</button>
-        </form>
-
+        <input v-model="user" />
+        <button v-on:click="toggleActive">Other Action</button>
+        <hr>
+        <div>
+            Name: {{ compMessage }}
+        </div>
+        <div>
+            Active: {{ isActive() }}
+        </div>
+        <div>
+            Loading: {{ loading }}
+        </div>
     </div>
 
 </body>
@@ -34,15 +30,31 @@
     new Vue({
         el:"#app",
         data:{
-            formData:{
-                name:'',
-                lastName:'',
-                age: ''
+            user:'',
+            active: false,
+            loading: false
+        },
+        watch:{
+            active(value){
+                this.loading = true;
+                setTimeout(() => {
+                    this.loading = false;
+                },3000)
+            }
+        },
+        computed:{
+            compMessage(){
+                console.log('Message !! Triggered !!')
+                return this.user === 'Akiko' ? 'Welcome' : 'Not allowed'
             }
         },
         methods:{
-            formHandler(){
-                console.log(this.formData)
+            isActive(){
+                console.log('Active !! Triggered !!')
+                return this.active ? 'Active' : 'Not Active'
+            },
+            toggleActive(){
+                this.active = this.active ? false : true
             }
         }
     })
