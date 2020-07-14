@@ -9,27 +9,22 @@
 <body>
     
     <div id="app">
-        <!-- <p v-for="(name, index) in names">
-            {{ index }} : {{ name }}
-        </p> -->
         
-        <!-- <ul>
-            <li v-for="(name, index) in names">
-                {{ index }} : {{ name }}
-            </li>
-        </ul> -->
-        
-        <!-- <ul>
-            <li v-for="(car, index) in cars">
-                {{ index }} : {{ car.brand }}, {{ car.color }}
-            </li>
-        </ul> -->
+        <form v-on:submit.prevent="formHandler">
+            <label>First Name</label>
+            <input type="text" v-model.trim="formData.name" /> <!-- trims white spaces -->
+            <hr>
+            
+            <label>Last Name</label>
+            <input type="text" v-model.trim="formData.lastName" /> 
+            <hr>
 
-        <ul>
-            <li v-for="(value, key, index) in user">
-                {{ index }} - {{ key }} : {{ value }}
-            </li>
-        </ul>
+            <label>Age</label>
+            <input type="text" v-model.number="formData.age" />
+            <hr>
+
+            <button type="submit">Submit</button>
+        </form>
 
     </div>
 
@@ -39,26 +34,16 @@
     new Vue({
         el:"#app",
         data:{
-            user: {
-                name: 'Akiko',
-                lastName: 'Kobayashi',
-                age: 21
-            },
-            names:['Akiko', 'Koba', 'Keja'],
-            cars: [
-                {
-                    brand: 'Ferrari',
-                    color: 'Red'
-                },
-                {
-                    brand: 'Lambo',
-                    color: 'Blue'
-                },
-                {
-                    brand: 'Ford',
-                    color: 'Black'
-                },
-            ]
+            formData:{
+                name:'',
+                lastName:'',
+                age: ''
+            }
+        },
+        methods:{
+            formHandler(){
+                console.log(this.formData)
+            }
         }
     })
 
