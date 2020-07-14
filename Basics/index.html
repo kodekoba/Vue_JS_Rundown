@@ -9,55 +9,61 @@
 <body>
     
     <div id="app">
+        <div>Instance one: {{ value }}</div>
+        <button @click="changeValue">Change</button>
+        {{ accessValue() }}
+    </div><hr>
 
-        <input v-model="user" />
-        <button v-on:click="toggleActive">Other Action</button>
-        <hr>
-        <div>
-            Name: {{ compMessage }}
-        </div>
-        <div>
-            Active: {{ isActive() }}
-        </div>
-        <div>
-            Loading: {{ loading }}
-        </div>
+    <div id="app2">
+        <div>Instance two: {{ value }}</div>
+        <button @click="saySomething">Change</button>
     </div>
 
 </body>
 <script>
 
-    new Vue({
+    const data = {
+        value: 'Instance one working !!'
+    }
+
+    let message = "Hey guys!!"
+
+    const app1 = new Vue({
         el:"#app",
         data:{
-            user:'',
-            active: false,
-            loading: false
-        },
-        watch:{
-            active(value){
-                this.loading = true;
-                setTimeout(() => {
-                    this.loading = false;
-                },3000)
-            }
-        },
-        computed:{
-            compMessage(){
-                console.log('Message !! Triggered !!')
-                return this.user === 'Akiko' ? 'Welcome' : 'Not allowed'
-            }
+            // name: '',
+            // value: 'Instance one working !!'
+            data
         },
         methods:{
-            isActive(){
-                console.log('Active !! Triggered !!')
-                return this.active ? 'Active' : 'Not Active'
+            changeValue(){
+                app2.value = "The value changed!"
             },
-            toggleActive(){
-                this.active = this.active ? false : true
+            accessValue(){
+                setTimeout(() => {
+                    console.log(this.name)
+                }, 5000)
             }
         }
     })
+
+    const app2 = new Vue({
+        el:"#app2",
+        data:{
+            value: 'Instance two working !!'
+        },
+        methods:{
+            saySomething(){
+                alert(message)
+            }
+        }
+    })
+
+    setTimeout(() => {
+        app1.name = 'Akiko';
+        app1.value = 'setTimeout changed this value !!';
+        console.log(app1.name);
+    }, 3000)
 
 </script>
 </html>
