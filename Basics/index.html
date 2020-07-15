@@ -9,60 +9,40 @@
 <body>
     
     <div id="app">
-        <div>Instance one: {{ value }}</div>
-        <button @click="changeValue">Change</button>
-        {{ accessValue() }}
-    </div><hr>
+        <name></name>
 
-    <div id="app2">
-        <div>Instance two: {{ value }}</div>
-        <button @click="saySomething">Change</button>
+        <name></name>
     </div>
 
 </body>
 <script>
 
-    const data = {
-        value: 'Instance one working !!'
-    }
+    Vue.component('name',{
+        data(){
+            return {
+                name: 'Akiko'
+            }
+        },
+        methods: {
+            alertSomething(){
+                alert('Hello there !!')
+            }
+        },
+        template : `
+            <div>
+                <div>{{ name }}</div>
+                <button @click="alertSomething">Click Here!</button>
+            </div>
+        `,
 
-    let message = "Hey guys!!"
+    }) 
 
     const app1 = new Vue({
-        el:"#app",
-        data:{
-            // name: '',
-            // value: 'Instance one working !!'
-            data
-        },
-        methods:{
-            changeValue(){
-                app2.value = "The value changed!"
-            },
-            accessValue(){
-                setTimeout(() => {
-                    console.log(this.name)
-                }, 5000)
-            }
-        }
-    })
-
-    const app2 = new Vue({
-        el:"#app2",
-        data:{
-            value: 'Instance two working !!'
-        },
-        methods:{
-            saySomething(){
-                alert(message)
-            }
-        }
+        el: '#app'
     })
 
     setTimeout(() => {
-        app1.name = 'Akiko';
-        app1.value = 'setTimeout changed this value !!';
-        console.log(app1.name);
+        app1.$mount('#app')
     }, 3000)
 
 </script>
